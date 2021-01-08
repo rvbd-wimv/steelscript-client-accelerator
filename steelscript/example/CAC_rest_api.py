@@ -18,7 +18,7 @@ SteelHead appliance and the existing authentication object. Then, we can use
 the SteelHead object to execute command on the SteelHead appliance as follows:
 steelhead_object.cli.exec_command("command_to_be_executed").
 This example script should be executed as follows:
-steelhead_cli.py <HOST> [-u USERNAME] [-p PASSWORD]
+cac_rest_api.py <HOST> [-c access_code]
 """
 
 from __future__ import (absolute_import, unicode_literals, print_function,
@@ -46,8 +46,8 @@ class ClientAcceleratorControllerCLIApp(Application):
             self.parser.error("Access_code needs to be specified")
 
     def main(self):
-        auth = OAuth(self.options.oauth)
-        cac = Service("appliance", self.options.host, auth=auth)
+        
+        cac = Service("appliance", self.options.host, auth=OAuth(self.options.oauth))
 
         print("\n********** Services **********\n")
         path = '/api/appliance/1.0.0/services'
